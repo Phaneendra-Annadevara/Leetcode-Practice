@@ -11,19 +11,26 @@
  */
 public class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-        HashSet<ListNode> set = new HashSet<>();
         ListNode temp1 = headA;
         ListNode temp2 = headB;
-        while(temp1!=null){
-            set.add(temp1);
-            temp1 = temp1.next;
-        }
-        while(temp2!=null){
-            if(set.contains(temp2)){
-                return temp2;
+        while(temp1!=temp2){
+            if(temp1==null){
+                temp1 = headB;
+               
+            }else{
+                 temp1 = temp1.next;
             }
-            temp2 = temp2.next;
+            if(temp2==null){
+                temp2 = headA;
+                
+            }else{
+                temp2 = temp2.next;
+            }
         }
-    return null;
+        return temp2;
     }
 }
+
+
+//Space complexity : O(1)
+//Time Complexity:  O(n+m)
