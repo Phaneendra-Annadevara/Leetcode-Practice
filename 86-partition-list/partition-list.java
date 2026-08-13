@@ -10,33 +10,24 @@
  */
 class Solution {
     public ListNode partition(ListNode head, int x) {
-        ListNode leftHead = null;
-        ListNode leftTail = null;
-        ListNode rightHead = null;
-        ListNode rightTail = null;
-        ListNode curr = head;
-        while(curr!=null){
-            ListNode next = curr.next;
-            curr.next = null;
-            if(curr.val<x){
-                if(leftHead==null){
-                    leftHead=leftTail = curr;
-                }else{
-                leftTail.next = curr;
-                leftTail = curr;
-                }
-            }else{
-                if(rightHead==null){
-                    rightHead=rightTail = curr;
-                }else{
-                rightTail.next = curr;
-                rightTail = curr;
-                }
+        ListNode small = new ListNode();
+        ListNode s = small;
+        ListNode large= new ListNode();
+        ListNode l = large;
+        ListNode temp = head;
+        while(temp!=null){
+            if(temp.val<x){
+                s.next = temp;
+                s = s.next;
             }
-            curr = next;
+            else{
+                l.next = temp;
+                l = l.next;
+            }
+            temp = temp.next;
         }
-        if(leftHead==null) return rightHead;
-        leftTail.next = rightHead;
-        return leftHead;
+        l.next = null;
+        s.next = large.next;
+        return small.next;
     }
 }
