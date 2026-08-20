@@ -15,7 +15,10 @@ class Solution {
        }
        res.addAll(arr1);
        res.addAll(arr2);
-    int[] primitiveArray = res.stream().mapToInt(Integer::intValue).toArray();
-    return primitiveArray;
+        int arr[] = new int[nums.length];
+        for(int i=0;i<nums.length;i++){
+            arr[i] = res.get(i);
+        }
+        return arr;
     }
 }
