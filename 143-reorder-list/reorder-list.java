@@ -10,30 +10,50 @@
  */
 class Solution {
     public void reorderList(ListNode head) {
-        List<Integer> arr = new ArrayList<>();
-        ListNode tem = head;
-        while(tem!=null){
-            arr.add(tem.val);
-            tem = tem.next;
+        ListNode slow = head;
+        ListNode fast = head;
+        ListNode prev = null;
+            if(head==null|| head.next==null) return;
+        while(fast!=null && fast.next!=null){
+            prev = slow;
+            fast = fast.next.next;
+            slow = slow.next;
         }
-        List<Integer> res = new ArrayList<>();
-        int i=0;
-        int j = arr.size()-1;
-        while(i<=j){
-            res.add(arr.get(i));
-            i++;
-            if(i<j){
-                res.add(arr.get(j));
-                j--;
-            }
-        }
-        ListNode curr = head;
-        int k = 0;
+        ListNode mid = slow;
+        prev.next = null; //1st part made seperated
+        ListNode rev = null;
+        ListNode temp = null;
+        ListNode curr = slow;
         while(curr!=null){
-            curr.val = res.get(k);
-            curr = curr.next;
-            k++;
+            temp = curr.next;
+            curr.next = rev;
+            rev = curr;
+            curr = temp;
         }
-        
+
+        ListNode t1 = head;
+        ListNode t2 = rev;
+        ListNode merge = new ListNode(-1);
+        ListNode newCurr = merge;
+        int cnt = 0;
+        while(t1!=null && t2!=null){
+            if(cnt%2==0){
+                newCurr.next= t1;
+                t1 = t1.next;
+                cnt++;
+            }else{
+                newCurr.next = t2;
+                t2 = t2.next;
+                cnt++;
+            }
+            newCurr = newCurr.next;
+        }
+        if(t1==null){
+            newCurr.next = t2;
+        }else{
+            newCurr.next = t1;
+        }
+        head.next = merge.next.next;
+       
     }
 }
