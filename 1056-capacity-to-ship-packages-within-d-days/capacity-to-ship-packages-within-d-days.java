@@ -4,7 +4,7 @@ class Solution {
         for(int i=0;i<weights.length;i++){
             min = Math.max(min,weights[i]);
         }
-        return min;
+        return min; //😄😌😌😌😌
     }
     public int maxWeight(int[] weights){
         int tot = 0;
