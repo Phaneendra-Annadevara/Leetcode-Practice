@@ -9,22 +9,23 @@
  
 class Solution {
     public int findInMountainArray(int target, MountainArray mountainArr) {
-        int l = 0;
-        int h = mountainArr.length()-1;
+        int n = mountainArr.length();
         int peak = -1;
+        int l = 0;
+        int h = n-1;
         while(l<h){
             int mid = l+(h-l)/2;
             if(mountainArr.get(mid)<mountainArr.get(mid+1)){
-                l= mid+1;
+                l = mid+1;
             }else{
                 h = mid;
             }
         }
         peak = l;
 
-        //left part
-        l = 0;
-        h = peak;
+        //left
+         l = 0;
+         h = peak;
         while(l<=h){
             int m = l+(h-l)/2;
             if(mountainArr.get(m)==target){
@@ -36,10 +37,9 @@ class Solution {
             }
         }
 
-
-        //right part
-        l = peak+1;
-        h = mountainArr.length()-1;
+        //right
+         l = peak+1;
+         h = n-1;
         while(l<=h){
             int m = l+(h-l)/2;
             if(mountainArr.get(m)==target){
