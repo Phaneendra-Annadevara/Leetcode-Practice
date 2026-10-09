@@ -1,31 +1,31 @@
 class Solution {
     public int minInsertions(String s) {
+        Stack<Character> stack = new Stack<>();
         int insert = 0;
-        int open = 0;
         for(int i=0;i<s.length();i++){
             char ch = s.charAt(i);
             if(ch=='('){
-                open++;
+                stack.push(ch);
             }
             else{
-                if(i+1 < s.length() && s.charAt(i+1)==')'){
-                    if(open>0){
-                        open--;
+                if(i+1<s.length() && s.charAt(i+1)==')'){
+                    i++;
+                    if(!stack.isEmpty()){
+                        stack.pop();
                     }else{
                         insert++;
                     }
-                    i++;
                 }else{
                     insert++;
-                    if(open>0){
-                        open--;
+                    if(!stack.isEmpty()){
+                        stack.pop();
                     }else{
                         insert++;
                     }
                 }
             }
         }
-        insert += open*2;
+        insert += stack.size()*2;
         return insert;
     }
 }
