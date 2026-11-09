@@ -1,35 +1,22 @@
 class Solution {
-    public String reverse(String s){
-        String res = "";
-        for(int i=s.length()-1;i>=0;i--){
-            char c = s.charAt(i);
-            res += c;
-        }
-        return res;
-    }
     public String processStr(String s) {
-        String res = "";
-        if(s.isEmpty()){
-            return "";
-        }
-        
-        for(int i=0;i<s.length();i++){
-            char ch= s.charAt(i);
-            if(ch>= 'a' && ch<='z'){
-                res += ch;
+        StringBuilder sb = new StringBuilder();
+        for(char ch : s.toCharArray()){
+            if(ch>='a' && ch<='z'){
+                sb.append(ch);
             }
             if(ch=='#'){
-                res += res;
+                sb.append(sb);
             }
             if(ch=='%'){
-                res = reverse(res);
+                sb.reverse();
             }
             if(ch=='*'){
-                if(!res.isEmpty()){
-                res = res.substring(0,res.length()-1);
+                if(sb.length()>0){
+                    sb.deleteCharAt(sb.length()-1);
                 }
             }
         }
-        return res;
+        return sb.toString();
     }
 }
